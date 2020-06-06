@@ -174,7 +174,9 @@ class Matchup:
         print(f"ADC ({self.ally['ADC'].name} vs {self.enemy['ADC'].name}): {winrate[3]}% ({games})")
         games, winrate[4] = self.ally['Support'].role_counters[self.enemy['Support'].name]
         print(f"Support ({self.ally['Support'].name} vs {self.enemy['Support'].name}): {winrate[4]}% ({games})")
-        print(f"Average Winrate: {round(sum(winrate) / len(winrate), 2)}%")
+        average_winrate = round(sum(winrate) / len(winrate), 2)
+        print(f"Average Winrate: {average_winrate}%")
+        print("Copypasta:", winrate, average_winrate)
         print()
 
 
@@ -186,20 +188,20 @@ def download_winrates():
 
 
 if __name__ == "__main__":
-    download_winrates()
+    # download_winrates()
     ally = {
-        'Top':     'nasus',
-        'Jungle':  'trundle',
-        'Middle':  'yasuo',
-        'ADC':     'caitlyn',
-        'Support': 'nautilus',
+        'Top':     'teemo',
+        'Jungle':  'nunu',
+        'Middle':  'orianna',
+        'ADC':     'ashe',
+        'Support': 'leona',
     }
     enemy = {
-        'Top':     'ornn',
-        'Jungle':  'hecarim',
-        'Middle':  'cassiopeia',
-        'ADC':     'lucian',
-        'Support': 'karma',
+        'Top':     'nasus',
+        'Jungle':  'masteryi',
+        'Middle':  'fizz',
+        'ADC':     'kaisa',
+        'Support': 'lulu',
     }
     matchup = Matchup(ally, enemy)
     matchup.recommend('Support', k=10, verbose=True)
