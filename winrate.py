@@ -190,18 +190,18 @@ def download_winrates():
 if __name__ == "__main__":
     # download_winrates()
     ally = {
-        'Top':     'teemo',
-        'Jungle':  'nunu',
-        'Middle':  'orianna',
-        'ADC':     'ashe',
-        'Support': 'leona',
+        'Top':     'fiora',
+        'Jungle':  'rammus',
+        'Middle':  'leblanc',
+        'ADC':     'jinx',
+        'Support': 'lulu',
     }
     enemy = {
-        'Top':     'nasus',
+        'Top':     'darius',
         'Jungle':  'masteryi',
-        'Middle':  'fizz',
+        'Middle':  'annie',
         'ADC':     'kaisa',
-        'Support': 'lulu',
+        'Support': 'lux',
     }
     matchup = Matchup(ally, enemy)
     matchup.recommend('Support', k=10, verbose=True)
