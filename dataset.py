@@ -3,6 +3,7 @@
 # Ref: https://riot-watcher.readthedocs.io/en/latest/riotwatcher/LeagueOfLegends/MatchApiV5.html#riotwatcher._apis.league_of_legends.MatchApiV5
 # Ref: https://developer.riotgames.com/app/555087/info
 
+from datetime import datetime
 import json
 import pandas as pd
 from tqdm import tqdm
@@ -14,7 +15,7 @@ with open("config.json") as f:
 # Config
 queue = 'RANKED_SOLO_5x5'
 tier = 'PLATINUM'
-divisions = ['III', 'IV']
+divisions = ['I', 'II', 'III', 'IV']
 
 # Init
 lolw = LolWatcher(api_key)
@@ -24,16 +25,16 @@ match_data = []
 
 try:
     # Collect data
-    for div in divisions:
+    for div in tqdm(divisions):
 
         # Get all players within a division
         players = lolw.league.entries('na1', queue, tier, div)
 
         # Get all matches of each player
-        for player in tqdm(players):
+        for player in tqdm(players, leave=False):
             id = player['summonerId']
             summoner = lolw.summoner.by_id('na1', id)
-            matches = lolw.match.matchlist_by_puuid('americas', summoner['puuid'], count=5)
+            matches = lolw.match.matchlist_by_puuid('americas', summoner['puuid'], count=20)
 
             # For each match, get the match entry
             for match_id in tqdm(matches, leave=False):
